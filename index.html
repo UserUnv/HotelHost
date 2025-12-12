@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Отель "Комфорт" - Главная</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+<link rel="stylesheet" href="https://fonts-online.ru/f37-holborn-vf.css">
+<style>
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #fff;
+  color: #000;
+  overflow-x: hidden;
+}
+.rent-button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #c00;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+.rent-button:hover {
+  background-color: #900;
+  transform: scale(1.05);
+}
+#concept {
+  background-color: red;
+  color: #fff;
+  padding: 40px 20px;
+  border-radius: 8px;
+}
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(255,255,255,0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 30px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+}
+header h1 {
+  margin: 0;
+  font-size: 2em;
+  display: flex;
+  align-items: center;
+}
+header h1 .icon {
+  margin-right: 10px;
+  font-size: 1.5em;
+  color: #c00;
+}
+.nav-center {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 5px;
+}
+.nav-button {
+  padding: 8px 16px;
+  background-color: #fff;
+  border: 2px solid #c00;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #c00;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  font-size: 1em;
+}
+.nav-button:hover {
+  background-color: #c00;
+  color: #fff;
+}
+.nav-button i {
+  margin-right: 8px;
+}
+.header {
+  padding-top: 80px;
+}
+#landing {
+  padding-top: 80px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url('back.png') no-repeat center/cover;
+}
+#landing div {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  text-align: center;
+  animation: fadeIn 2s ease;
+}
+#landing h2 {
+  font-size: 2.5em;
+  color: #c00;
+  margin: 0 0 20px 0;
+}
+#landing p {
+  font-size: 1.2em;
+  margin: 0;
+}
+section {
+  max-width: 3200px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+}
+section h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #c00;
+}
+.concept {
+  margin-bottom: 40px;
+}
+.concept h3 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+.concept p {
+  max-width: 800px;
+  margin: 0 auto 20px;
+  line-height: 1.6;
+  text-align: center;
+}
+.concept ul {
+  max-width: 800px;
+  margin: 0 auto 20px;
+  padding-left: 20px;
+  list-style-type: disc;
+  text-align: left;
+}
+.services {
+  display: flex;
+  flex-direction: row;
+  justify-content: center; 
+  gap: 20px; 
+  flex-wrap: wrap; 
+}
+.service-card {
+  width: 300px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  margin: 15px;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+.service-image img {
+  width: 100%;
+  height: auto;
+}
+.service-info {
+  padding: 15px;
+  text-align: center;
+}
+.service-info h4 {
+  margin: 10px 0;
+  font-size: 1.2em;
+  color: #c00;
+}
+.service-info p {
+  font-size: 0.95em;
+  color: #333;
+}
+.faq {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 20px;
+}
+.faq-container {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  overflow-x: auto;
+}
+.faq-item {
+  width: 250px;
+  height: 250px;
+  perspective: 1000px;
+  cursor: pointer;
+}
+.faq-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.8s;
+}
+.faq-item.open .faq-inner {
+  transform: rotateX(180deg);
+}
+.faq-front, .faq-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.faq-front {
+  background-color: #fdfdfd;
+  font-weight: bold;
+  font-size: 16px;
+  color: red;
+}
+.faq-back {
+  background-color: #ffffff;
+  color: #000000;
+  font-size: 14px;
+  transform: rotateX(180deg);
+}
+.faq-item:hover {
+  transform: scale(1.01);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+}
+.contacts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40px;
+}
+.contact-info {
+  max-width: 600px;
+  margin-bottom: 20px;
+}
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.gallery img {
+  width: 200px;
+  height: auto;
+  margin: 10px;
+  border-radius: 8px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.gallery img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+#hotel-rooms {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  padding: 20px;
+}
+#hotel-rooms .card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  width: 220px;
+  padding: 15px;
+  margin: 10px;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#hotel-rooms .card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+#hotel-rooms .room-photo {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+#hotel-rooms .room-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+#hotel-rooms .card h4 {
+  margin: 10px 0 15px 0;
+  font-size: 1.2em;
+  color: #c00;
+  text-align: center;
+}
+#hotel-rooms .card p {
+  margin: 5px 0;
+  font-size: 1em;
+  color: #333;
+}
+#roomModal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+#roomModalContent {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 600px;
+  width: 90%;
+  position: relative;
+}
+#closeModal {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 20px;
+  cursor: pointer;
+}
+.carousel {
+  display: flex;
+  overflow-x: auto;
+  gap: 10px;
+  margin-top: 10px;
+}
+.carousel img {
+  width: 150px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+.contact-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  max-width: 1600px;
+  height: auto;
+  margin: 0 auto 40px;
+  padding: 20px;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  border-radius: 16px;
+  gap: 20px;
+  font-family: 'Holborn VF', sans-serif;
+  font-weight: 700;
+}
+.redT {
+  color: red;
+}
+.BluT {
+  color: blue;
+}
+.PurT {
+  color: plum;
+}
+.map-container {
+  display: flex;
+  width: 400%;
+  max-width: 900px;
+  height: 800px;
+  box-shadow: 0 8px 24px rgba(255, 0, 0, 0.2);
+  border-radius: 1px;
+  overflow: hidden;
+  margin-left: auto;
+  flex: 1;
+}
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(-20px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+</style>
+</head>
+<body>
+<header>
+<h1>
+  <span class="icon"><i class="fas fa-hotel"></i></span>
+  Отель "Комфорт"
+</h1>
+<nav class="nav-center">
+<a href="#landing" class="nav-button">Главная</a>
+<a href="#catalog" class="nav-button">Каталог номеров</a>
+<a href="#concept" class="nav-button">О концепции</a>
+<a href="#services" class="nav-button">Услуги</a>
+<a href="#faq" class="nav-button">FAQ</a>
+<a href="#contacts" class="nav-button">Контакты</a>
+<a href="profile.html" class="nav-button" title="Личный кабинет">
+<i class="fas fa-user"></i>
+</a>
+</nav>
+</header>
+<div class="header"></div>
+<section id="landing" class="section">
+  <div>
+    <h2 style="color: red;">Отель "Комфорт"</h2>
+    <p>Лучшее место для отдыха и работы</p>
+  </div>
+</section>
+<section id="concept" class="section" style="background-color: red; color: #fff; padding: 40px 20px; border-radius: 8px;">
+<h2 style="color: #fff;">Описание концепции и преимуществ отеля</h2>
+<h3>Комфорт и уют для каждого гостя</h3>
+<p>Наш отель предлагает современный дизайн, высококлассное обслуживание и уникальные условия для отдыха и деловых поездок. Мы создаем атмосферу уюта и спокойствия, чтобы каждый гость чувствовал себя как дома.</p>
+<h3>Преимущества нашего отеля</h3>
+<ul>
+<li>Расположение в центре города</li>
+<li>Современные номера с всеми удобствами</li>
+<li>Бесплатный Wi-Fi и паркинг</li>
+<li>Ресторан и спа-зона</li>
+<li>Круглосуточная служба безопасности</li>
+</ul>
+</section>
+<section id="services" class="section">
+<h2>Наши услуги</h2>
+<div class="services">
+  <div class="service-card">
+    <div class="service-image">
+      <img src="nomera.jpg" alt="Комфортабельные номера" />
+    </div>
+    <div class="service-item">
+      <i class="fas fa-bed"></i>
+      <div class="service-info">
+        <h4>Комфортабельные номера</h4>
+        <p>Выберите из разнообразия номеров для отдыха и деловых поездок, оборудованных всем необходимым.</p>
+      </div>
+    </div>
+  </div>
+  <div class="service-card">
+    <div class="service-image">
+      <img src="restaurant-016.jpg" alt="Ресторан и бар" />
+    </div>
+    <div class="service-item2">
+      <i class="fas fa-utensils"></i>
+      <div class="service-info">
+        <h4>Ресторан и бар</h4>
+        <p>Наслаждайтесь блюдами международной кухни и авторскими коктейлями в уютной атмосфере.</p>
+      </div>
+    </div>
+  </div>
+  <div class="service-card">
+    <div class="service-image">
+      <img src="back.png" alt="СПА и фитнес" />
+    </div>
+    <div class="service-item3">
+      <i class="fas fa-spa"></i>
+      <div class="service-info">
+        <h4>СПА и фитнес</h4>
+        <p>Расслабьтесь в спа-зоне или займитесь спортом в современном фитнес-центре.</p>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+<section id="faq" class="section" style="background-color: red; color: #fff;">
+  <h2 style="color: #fff;">Часто задаваемые вопросы</h2>
+  <div class="faq-container">
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-inner">
+        <div class="faq-front">Как забронировать номер?</div>
+        <div class="faq-back" style="color: red;">Вы можете забронировать номер через наш сайт, по телефону или через сторонние сервисы бронирования.</div>
+      </div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-inner">
+        <div class="faq-front">Можно ли заказать услуги спа?</div>
+        <div class="faq-back" style="color: red;">Да, услуги спа доступны по предварительной записи на ресепшене или через наш сайт.</div>
+      </div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-inner">
+        <div class="faq-front">Есть ли парковка?</div>
+        <div class="faq-back" style="color: red;">Да, у отеля есть бесплатная охраняемая парковка для гостей.</div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="contacts" class="section">
+<h2>Контактная информация</h2>
+<div class="contact-card">
+  <div class="contact-info">
+    <p><strong class="redT">Адрес:</strong> г. Москва, ул. Х-С, д.763
+    <p>При желании вы можете посетить наш офис лично. Предварительно согласуйте время визита.</p>
+    <p><strong class="redT">Телефон:</strong>+7 (123) 456-78-90
+<p>Звоните в любое удобное для вас время — наши операторы готовы принять ваш звонок и предоставить всю необходимую информацию.</p>
+    <p><strong class="redT">Email:</strong> Chetotam@hotel.ru</p>
+    <p>Напишите нам, и мы обязательно ответим в кратчайшие сроки. Используйте этот адрес для уточнений, запросов и бронирований.</p>
+    <p><strong class="redT">Форма обратной связи:</strong></p>
+<p>На нашем сайте вы найдете удобную форму для быстрого обращения. Просто заполните свои контактные данные и оставьте сообщение — мы свяжемся с вами в ближайшее время.</p>
+    <p><strong class="redT">Социальные сети:</strong>
+Следите за нашими новостями и акциями в социальных сетях:</p>
+
+<p><strong class="BluT">ВКонтакте:</strong> @hotel-example</p>
+<p><strong class="PurT">Instagram:</strong> @hotel_example_official</p>
+  </div>
+  <div class="map-container">
+    <iframe 
+      src="https://www.openstreetmap.org/export/embed.html?bbox=37.6173%2C55.7558%2C37.6273%2C55.7658&amp;layer=mapnik" 
+      style="border:0; width:100%; height:800px;" allowfullscreen="" loading="lazy"></iframe>
+  </div>
+</div>
+</section>
+<section id="catalog" class="section">
+<h2 style="text-align:center; margin-top:30px;">Номера отеля</h2>
+<div id="hotel-rooms">
+  <div class="card" data-id="1">
+    <div class="room-photo">
+      <img src="standart.jpg" alt="Фото номера" />
+    </div>
+    <h4>Стандарт</h4>
+    <p>Цена: 3000 ₽</p>
+    <p>Подробнее</p>
+    <button class="rent-button">Арендовать</button>
+  </div>
+  <div class="card" data-id="2">
+    <div class="room-photo">
+      <img src="Luks.jpg" alt="Фото номера" />
+    </div>
+    <h4>Люкс</h4>
+    <p>Цена: 7000 ₽</p>
+    <p>Подробнее</p>
+    <button class="rent-button">Арендовать</button>
+  </div>
+  <div class="card" data-id="3">
+    <div class="room-photo">
+      <img src="junior.jpg" alt="Фото номера" />
+    </div>
+    <h4>Джуниор Сюит</h4>
+    <p>Цена: 5000 ₽</p>
+    <p>Подробнее</p>
+    <button class="rent-button">Арендовать</button>
+  </div>
+</div>
+</section>
+<div id="roomModal">
+  <div id="roomModalContent">
+    <span id="closeModal">&times;</span>
+    <h3 id="roomTitle"></h3>
+    <p id="roomPrice"></p>
+    <p id="roomArea"></p>
+    <div class="carousel" id="photoCarousel"></div>
+  </div>
+</div>
+<script>
+const roomDetails = {
+  1: {
+    title: 'Стандарт',
+    price: '3000 ₽',
+    area: '20 м²',
+    photos: [
+      'https://via.placeholder.com/150x100?text=Стандарт+1',
+      'https://via.placeholder.com/150x100?text=Стандарт+2',
+      'https://via.placeholder.com/150x100?text=Стандарт+3'
+    ]
+  },
+  2: {
+    title: 'Люкс',
+    price: '7000 ₽',
+    area: '50 м²',
+    photos: [
+      'https://via.placeholder.com/150x100?text=Люкс+1',
+      'https://via.placeholder.com/150x100?text=Люкс+2',
+      'https://via.placeholder.com/150x100?text=Люкс+3'
+    ]
+  },
+  3: {
+    title: 'Джуниор Сюит',
+    price: '5000 ₽',
+    area: '30 м²',
+    photos: [
+      'https://via.placeholder.com/150x100?text=Джуниор+1',
+      'https://via.placeholder.com/150x100?text=Джуниор+2',
+      'https://via.placeholder.com/150x100?text=Джуниор+3'
+    ]
+  }
+};
+document.querySelectorAll('.card').forEach(card => {
+  card.addEventListener('click', () => {
+    const id = card.getAttribute('data-id');
+    const details = roomDetails[id];
+    document.getElementById('roomTitle').textContent = details.title;
+    document.getElementById('roomPrice').textContent = 'Цена: ' + details.price;
+    document.getElementById('roomArea').textContent = 'Площадь: ' + details.area;
+    const carousel = document.getElementById('photoCarousel');
+    carousel.innerHTML = '';
+    details.photos.forEach(src => {
+      const img = document.createElement('img');
+      img.src = src;
+      carousel.appendChild(img);
+    });
+    document.getElementById('roomModal').style.display = 'flex';
+  });
+});
+document.getElementById('closeModal').addEventListener('click', () => {
+  document.getElementById('roomModal').style.display = 'none';
+});
+window.addEventListener('click', (e) => {
+  if (e.target == document.getElementById('roomModal')) {
+    document.getElementById('roomModal').style.display = 'none';
+  }
+});
+function toggleFaq(element) {
+  element.classList.toggle('open');
+}
+</script>
+<footer style="background-color:#ff0000; color:#fff; padding:40px 20px; margin-top:40px;">
+  <div style="max-width:1200px; margin:auto; display:flex; flex-wrap:wrap; justify-content:space-between;">
+    <div style="flex:1; min-width:200px; margin-bottom:20px;">
+      <h3 style="margin-bottom:15px;">О компании</h3>
+      <p style="color: #fff;">Мы предлагаем лучшие услуги для вашего отдыха и бизнеса. Свяжитесь с нами для получения дополнительной информации.</p>
+    </div>
+    <div style="flex:1; min-width:200px; margin-bottom:20px;">
+      <h3 style="margin-bottom:15px;">Быстрые ссылки</h3>
+      <ul style="list-style:none; padding:0;">
+        <li style="margin-bottom:10px;"><a href="#about" style="color:#fff; text-decoration:none;">О нас</a></li>
+        <li style="margin-bottom:10px;"><a href="#services" style="color:#fff; text-decoration:none;">Услуги</a></li>
+        <li style="margin-bottom:10px;"><a href="#contacts" style="color:#fff; text-decoration:none;">Контакты</a></li>
+        <li style="margin-bottom:10px;"><a href="#blog" style="color:#fff; text-decoration:none;">Блог</a></li>
+      </ul>
+    </div>
+    <div style="flex:1; min-width:200px; margin-bottom:20px;">
+      <h3 style="margin-bottom:15px; color:#fff;">Контакты</h3>
+      <p style="color: #fff;">Телефон: +7 (123) 456-78-90</p>
+      <p style="color: #fff;">Email: Chetotam@hotel.ru</p>
+      <p style="color: #fff;">Адрес: г. Москва, ул. Х-С, д.763</p>
+      <div style="margin-top:15px;">
+        <a href="#" style="margin-right:10px; color:#fff; font-size:1.2em;"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" style="margin-right:10px; color:#fff; font-size:1.2em;"><i class="fab fa-instagram"></i></a>
+        <a href="#" style="margin-right:10px; color:#fff; font-size:1.2em;"><i class="fab fa-twitter"></i></a>
+        <a href="#" style="color:#fff; font-size:1.2em;"><i class="fab fa-telegram-plane"></i></a>
+      </div>
+    </div>
+  </div>
+  <div style="text-align:center; margin-top:30px; font-size:0.9em;">
+    &copy; 2024 Ваша компания. Все права защищены.
+  </div>
+</footer>
+</body>
+</html>

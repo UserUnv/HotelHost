@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Регистрация и Личный кабинет</title>
+<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<style>
+#profile {
+  max-width: 600px;
+  margin: 300px auto 0;
+  padding: 20px;
+  background: #f0f0f0;
+  border-radius: 8px;
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>
+    <span class="icon"><i class="fas fa-user-cog"></i></span> Личный кабинет
+  </h1>
+  <div class="nav-center">
+    <a href="index.html" class="nav-button"><i class="fas fa-map"></i> Назад</a>
+  </div>
+</header>
+<div id="profile">
+  <h3>Ваш профиль</h3>
+  <form id="profileForm">
+    <div style="display:flex; align-items:center; justify-content:space-between;">
+      <label for="fullName">ФИО:</label>
+      <div style="display:flex; align-items:center;">
+        <input type="text" id="fullName" placeholder="Введите ФИО" required />
+      </div>
+    </div>
+    <div style="display:flex; align-items:center; justify-content:space-between;">
+      <label for="phone">Телефон:</label>
+      <input type="tel" id="phone" placeholder="Введите телефон" required />
+    </div>
+    <div style="display:flex; align-items:center; justify-content:space-between;">
+      <label for="email">Email:</label>
+      <input type="email" id="email" placeholder="Введите email" required />
+    </div>
+    <button type="submit" class="btn btn-primary" style="margin-top:10px;">Сохранить</button>
+  </form>
+  <div id="profileData" style="display:none; margin-top:20px;">
+    <h4>Данные профиля</h4>
+    <p><strong>ФИО:</strong> <span id="dispFullName"></span></p>
+    <p><strong>Телефон:</strong> <span id="dispPhone"></span></p>
+    <p><strong>Email:</strong> <span id="dispEmail"></span></p>
+    <button id="btnEditProfile" class="btn btn-secondary" style="margin-top:10px;">Редактировать</button>
+  </div>
+  <div class="profile-custom" style="margin-top:20px;">
+    <div style="display:flex; flex-direction:column; align-items:center;">
+    </div>
+    <div style="margin-top:10px; text-align:center;">
+      <label>Имя:</label><br/>
+      <div style="display:flex; align-items:center; justify-content:center;">
+        <span id="profileNameDisplay" style="font-weight:bold; font-size:1.2em; margin-right:10px;"></span>
+        <i class="fas fa-edit edit-icon" id="editProfileName" title="Редактировать имя"></i>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+let profileData = JSON.parse(localStorage.getItem('profile')) || {
+  fullName: 'Гость',
+  phone: '',
+  email: '',
+  icon: 'fas fa-user-circle',
+  name: 'Гость'
+};
+function updateProfileDisplay() {
+  document.getElementById('dispFullName').textContent = profileData.fullName;
+  document.getElementById('dispPhone').textContent = profileData.phone;
+  document.getElementById('dispEmail').textContent = profileData.email;
+  document.getElementById('profileNameDisplay').textContent = profileData.name;
+  document.getElementById('profileIcon').className = 'fas ' + profileData.icon;
+}
+function loadProfile() {
+  if (localStorage.getItem('profile')) {
+    profileData = JSON.parse(localStorage.getItem('profile'));
+  }
+  updateProfileDisplay();
+  document.getElementById('fullName').value = profileData.fullName;
+  document.getElementById('phone').value = profileData.phone;
+  document.getElementById('email').value = profileData.email;
+}
+loadProfile();
+document.getElementById('profileForm').addEventListener('submit', e => {
+  e.preventDefault();
+  profileData.fullName = document.getElementById('fullName').value;
+  profileData.phone = document.getElementById('phone').value;
+  profileData.email = document.getElementById('email').value;
+  localStorage.setItem('profile', JSON.stringify(profileData));
+  updateProfileDisplay();
+  alert('Данные сохранены');
+  document.getElementById('profileData').style.display = 'block';
+});
+document.getElementById('btnEditProfile').addEventListener('click', () => {
+  document.getElementById('profileData').style.display = 'none';
+});
+document.getElementById('editProfileName').addEventListener('click', () => {
+  const newName = prompt('Введите новое имя:', profileData.name);
+  if (newName !== null && newName.trim() !== '') {
+    profileData.name = newName.trim();
+    localStorage.setItem('profile', JSON.stringify(profileData));
+    updateProfileDisplay();
+  }
+});
+</script>
+</body>
+</html>
